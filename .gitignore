@@ -1,0 +1,31 @@
+# Ignore Python compiled files
+__pycache__/
+*.pyc
+*.pyo
+
+# Ignore environment files
+.env
+venv/
+.venv/
+
+# Ignore Flask specific files
+instance/
+*.sqlite3
+*.log
+
+# Ignore Node.js specific files (if using React with Flask)
+node_modules/
+dist/
+build/
+
+# Ignore IDE specific files
+.vscode/
+.idea/
+
+# Ignore OS generated files
+.DS_Store
+Thumbs.db
+
+# Ignore Tailwind specific files
+public/css/
+public/js/

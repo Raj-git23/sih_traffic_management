@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Traffic Management System</title>
+    <link rel="stylesheet" href="../static/css/output.css" />
+    <link rel="stylesheet" href="../static/index.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+  </head>
+  <body class="font-monteserrat">
+    <!-- ########################## Navbar ########################## -->
+    <div
+      class="flex text-[#201c1cdd] items-center bg-[#c6b9b9] justify-between font-monteserrat p-3"
+    >
+      <p class="mt-2 pl-4 font-normal bg-none">Smart AI Traffic Manager</p>
+
+      <div
+        class="flex gap-1 font-bold border-2 text-[#000000] text-center border-[#000000] p-1 rounded-lg bg-[#7b7070c3]"
+      >
+        <button class="bg-[#999494c3] p-1 rounded-lg">Live</button>
+        <button class="bg-[#999494c3] p-1 rounded-lg">Preview</button>
+      </div>
+
+      <p class="pr-4 font-normal">Delhi, India</p>
+    </div>
+    <!-- ########################## Navbar End ######################## -->
+
+    <!--  ########################## Main body component ########################## -->
+    <div class="h-[calc(100vh-70px)] flex gap-2 w-full">
+      <!-- ####################### MAP ###################### -->
+      <div
+        id="map"
+        class="flex items-center justify-center text-9xl bg-gray-600 w-3/5"
+      >
+        MAP
+      </div>
+
+      <!-- ######################### DATA ############################ -->
+      <div id="data" class="w-2/5">
+        <div class="flex items-center gap-4 text-xl p-3">
+          <i class="fa-solid fa-arrow-right-long fa-lg"></i>
+          <p class="">
+            Delhi 
+            <span class="fa-solid fa-arrow-right-arrow-left"></span>
+            <p>Agra Intersection point</p>
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ############################## Script ############################### -->
+    <script>
+      fetch("/api/data")
+        .then((response) => response.json())
+        .then((data) => {
+          document.getElementById("data").innerText = data.message;
+        });
+    </script>
+  </body>
+</html>
