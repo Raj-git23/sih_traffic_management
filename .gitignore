@@ -27,5 +27,5 @@ build/
 Thumbs.db
 
 # Ignore Tailwind specific files
-public/css/
+static/css/
 public/js/
