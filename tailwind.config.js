@@ -2,7 +2,12 @@
 module.exports = {
   content: ["./app/templates/*"],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+      'josefin': ["Josefin Sans", 'sans-serif'],
+      'montserrat': ["Montserrat", 'sans-serif'],      
+      },
+    },
   },
   plugins: [],
 }
