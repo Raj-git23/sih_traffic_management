@@ -12,7 +12,7 @@
 
 <body class="font-montserrat">
   <!-- ########################## Navbar ########################## -->
-  <div class="flex text-[#201c1cdd] items-center bg-[#121515d5] justify-between font-monteserrat p-3">
+  <div class="flex text-[#d3d2d2dd] items-center bg-[#121515d5] justify-between font-monteserrat p-3">
     <p class="mt-2 pl-4 font-normal bg-none">Smart AI Traffic Manager</p>
 
     <div
@@ -42,9 +42,9 @@
         <!-- ############################# Heading ############################## -->
         <!-- <i class="fa-solid fa-arrow-right-long fa-lg"></i> -->
         <p class="mr-1">
-          Delhi
+          Rohini-16
           <span class="fa-solid fa-arrow-right-arrow-left ml-1"></span>
-        <p>Agra Intersection Point</p>
+        <p>Rohini-16 Intersection Point</p>
         </p>
         <br>
         <hr class="border-1 w-[36%] mx-auto absolute top-32 mt-3 border-[#b9b0b0]" />
@@ -55,115 +55,175 @@
 
 
         <!-- ####################  LANE 1 #################### -->
-        <div class="flex flex-col mt-6 p-2 relative mx-auto h-32 w-[95%] border-2 rounded-lg overflow-hidden">
+        <div class="flex flex-col mt-6 p-2 relative mx-auto h-32 w-[95%] border-2 rounded-lg overflow-visible">
           <div class="flex items-center justify-between h-10 border-b-2 w-full border-black border-opacity-10">
-            <p class="text-2xl ml-2">Mirzapur S1</p>
-            <div class="flex items-center pr-1 py-1 rounded-full mb-2 border-2 border-[#0e852dc2]">
-              <p class="text-sm text-green-500 relative congested-open-label">Open Lane</p>
+            <p class="text-2xl ml-2">Rohini East</p>
+            <div class="flex items-center mb-2">
+              <p id="lane-status-1"
+                class="text-sm text-green-500 relative congested-open-label px-1 py-1 rounded-full border-2 border-[#0e852dc2]">
+                Open Lane</p>
             </div>
           </div>
+          <p id="timer1"
+            class="absolute traffic-light green flex items-center right-0 font-montserrat font-bold text-xl border-2 border-green-600 rounded-lg px-1 top-11 mr-2 mt-2">
+            00:00
+          </p>
 
           <div class="flex font-montserrat flex-col mt-2 px-2">
-            <p class="text-sm truncate">No of Vehicles - 56</p>
+            <p class="text-sm truncate">No of Vehicles - <span id="random-number-1"
+                class="font-semibold text-md"></span></p>
             <p class="text-sm truncate">Congestion Rate - 40% (more than last hour)</p>
           </div>
 
-          <button class="absolute bottom-1 right-4 p-1 rounded">
-            <i class="fa-solid fa-angle-down fa-md"></i>
-          </button>
+          <div class="relative z-10">
+            <button class="absolute right-4" onclick="toggleDropdown('dropdownContent1', 'dropdownIcon1')">
+              <i id="dropdownIcon1" class="fa-solid fa-video fa-md"></i>
+            </button>
+          </div>
+
+          <!-- Dropdown content -->
+          <div id="dropdownContent1"
+            style="width: 21rem; height: 16rem; padding: 5px; top: 24px; right: 10px; margin-top: 6rem; bottom: 2rem;"
+            class="absolute bg-[#c6e3e85c] border border-gray-300 shadow-lg mb-20 rounded-lg z-20 hidden">
+            <video autoplay muted playsinline style="width: 100%; height: 100%; object-fit: cover; border-radius: 10px;"
+              class="rounded-xl">
+              <source src="../static/img/vid.mp4" type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+
+          </div>
         </div>
 
 
 
         <!-- ####################  LANE 2 #################### -->
-        <div class="flex flex-col p-2 relative mx-auto h-32 w-[95%] border-2 rounded-lg overflow-hidden">
+        <div class="flex flex-col p-2 relative mx-auto h-32 w-[95%] border-2 rounded-lg overflow-visible">
           <div class="flex items-center justify-between h-10 border-b-2 w-full border-black border-opacity-10">
-            <p class="text-2xl ml-2">Mirzapur S2</p>
-            <div class="flex items-center pr-1 py-1 rounded-full mb-2 border-2 border-[#e3e328df]">
-              <p class="text-sm text-yellow-500 relative congested-medium-label">Moderate Traffic</p>
+            <p class="text-2xl ml-2">Rohini West</p>
+            <div class="flex items-center  mb-2">
+              <p id="lane-status-2"
+                class="text-sm text-green-500 relative congested-open-label px-1 py-1 rounded-full border-2 border-[#0e852dc2]">
+                Open Lane</p>
             </div>
           </div>
+          <p id="timer2"
+            class="absolute traffic-light red flex items-center right-0 font-montserrat font-bold text-xl border-2 border-green-600 rounded-lg px-1 top-11 mr-2 mt-2">
+            00:00
+          </p>
 
           <div class="flex font-montserrat flex-col mt-2 px-2">
-            <p class="text-sm truncate">No of Vehicles - 56</p>
+            <p class="text-sm truncate">No of Vehicles - <span id="random-number-2"
+                class="font-semibold text-md"></span></p>
             <p class="text-sm truncate">Congestion Rate - 40% (more than last hour)</p>
+            <p id="emergencyMessage" class="text-md text-red-600 font-bold hidden absolute bottom-1 left-4 z-10">
+              <span><i class="fa-solid fa-truck-medical"></i></span> Emergency vehicle detected
+            </p>
+            </div>
+
+          <div class="relative z-10">
+            <button class="absolute right-4 " onclick="toggleDropdown('dropdownContent2', 'dropdownIcon2')">
+              <i id="dropdownIcon2" class="fa-solid fa-video fa-md"></i>
+            </button>
           </div>
 
-          <button class="absolute bottom-2 right-4 p-1 rounded">
-            <i class="fa-solid fa-angle-down fa-md"></i>
-          </button>
+          <!-- Dropdown content -->
+          <div id="dropdownContent2"
+            style="width: 21rem; height: 16rem; padding: 5px; top: 24px; right: 10px; margin-top: 6rem; bottom: 2rem;"
+            class="absolute bg-[#c6e3e85c] border border-gray-300 shadow-lg mb-20 rounded-lg z-20 hidden">
+            <video autoplay muted playsinline style="width: 100%; height: 100%; object-fit: cover; border-radius: 10px;"
+              class="rounded-xl">
+              <source src="../static/img/vid_night.mp4" type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+          </div>
         </div>
 
 
         <!-- ########################  LANE 3 ####################### -->
         <div class="flex flex-col p-2 relative mx-auto h-32 w-[95%] border-2 rounded-lg overflow-visible">
           <div class="flex items-center justify-between h-10 border-b-2 w-full border-black border-opacity-10">
-            <p class="text-2xl ml-2">Mirzapur S3</p>
-            <div class="flex items-center pr-1 py-1 rounded-full mb-2 border-2 border-red-600">
-              <p class="text-sm text-red-700 relative congested-label">Congested</p>
+            <p class="text-2xl ml-2">Rohini south</p>
+            <div class="flex items-center mb-2">
+              <p id="lane-status-3"
+                class="text-sm text-green-700 relative congested-open-label px-1 py-1 rounded-full border-2 border-[#0e852dc2]">
+                Open Lane</p>
             </div>
           </div>
+          <p
+            class="absolute text-[#dcd92d] traffic-light-no flex items-center right-0 font-montserrat font-bold text-xl border-2 border-[#dcd92d] rounded-lg px-1 top-11 mr-2 mt-2">
+            00:00
+          </p>
 
           <div class="flex flex-col font-montserrat mt-2 px-2">
-            <p class="text-sm truncate">No of Vehicles - 56</p>
+            <p class="text-sm truncate">No of Vehicles - <span id="random-number-3"
+                class="font-semibold text-md"></span></p>
             <p class="text-sm truncate">Congestion Rate - 40% (more than last hour)</p>
           </div>
 
           <div class="relative z-10">
             <button class="absolute right-4" onclick="toggleDropdown('dropdownContent3', 'dropdownIcon3')">
-              <i id="dropdownIcon3" class="fa-solid fa-angle-down fa-md"></i>
+              <i id="dropdownIcon3" class="fa-solid fa-video fa-md"></i>
             </button>
           </div>
 
-          <!-- Dropdown stays within the main container
+          <!-- Dropdown content -->
           <div id="dropdownContent3"
-            class="dropdown-content absolute top-24 left-0 mt-8 w-full bg-[#c6e3e85c] border border-gray-300 shadow-lg rounded-lg p-2 z-20 hidden">
-            <p>Vehicles/Lane: ?</p>
-            <p>Emergency Vehicles Count: ?</p>
-            <p>Delay Time: ?</p>
-            <video controls autoplay class="w-full mt-2 rounded">
+            style="width: 21rem; height: 16rem; padding: 5px; top: 24px; right: 10px; margin-top: 6rem; bottom: 2rem;"
+            class="absolute bg-[#c6e3e85c] border border-gray-300 shadow-lg mb-20 rounded-lg z-20 hidden">
+            <video controls autoplay style="width: 100%; height: 100%; object-fit: cover; border-radius: 10px;"
+              class="rounded-xl">
+
               <source src="https://videos.pexels.com/video-files/20444835/20444835-hd_1920_1080_30fps.mp4"
                 type="video/mp4">
               Your browser does not support the video tag.
             </video>
-          </div> -->
+          </div>
+
+
         </div>
 
-        <!-- ####################  LANE 4 #################### -->
+
+        <!-- #########################  LANE 4 ######################## -->
         <div class="flex flex-col p-2 relative mx-auto h-32 w-[95%] border-2 rounded-lg overflow-visible">
           <div class="flex items-center justify-between h-10 border-b-2 w-full border-black border-opacity-10">
-            <p class="text-2xl ml-2">Mirzapur S4</p>
-            <div class="flex items-center pr-1 py-1 rounded-full mb-2 border-2 border-yellow-300">
-              <p class="text-sm text-yellow-400 relative congested-medium-label">Moderate Traffic</p>
+            <p class="text-2xl ml-2">Rohini North</p>
+            <div class="flex items-center mb-2">
+              <p id="lane-status-4"
+                class="text-sm text-green-400 relative px-1 py-1 rounded-full border-2 border-[#0e852dc2]">Open Lane</p>
             </div>
           </div>
           <p
-            class="absolute right-2 font-montserrat font-bold text-xl border-2 border-yellow-600 px-1 top-11 mr-2 mt-2">
-            00:10
+            class="absolute text-[#dcd92d] traffic-light-no flex items-center right-0 font-montserrat font-bold text-xl border-2 border-[#dcd92d] rounded-lg px-1 top-11 mr-2 mt-2">
+            00:00
           </p>
+
+          <!-- <p id="random-number" class="absolute right-20 font-montserrat font-bold text-xl border-2 border-yellow-600 px-1 top-11 mr-2 mt-2"></p> -->
+
+
           <div class="flex font-montserrat flex-col mt-2 px-2">
-            <p class="text-sm truncate">No of Vehicles - 56</p>
+            <p class="text-sm truncate">No of Vehicles - <span id="random-number-4"
+                class="font-semibold text-md"></span></p>
             <p class="text-sm truncate">Congestion Rate - 40% (more than last hour)</p>
           </div>
 
           <div class="relative z-10">
             <button class="absolute right-4" onclick="toggleDropdown('dropdownContent4', 'dropdownIcon4')">
-              <i id="dropdownIcon4" class="fa-solid fa-angle-down fa-md"></i>
+              <i id="dropdownIcon4" class="fa-solid fa-video fa-md"></i>
             </button>
           </div>
 
-          <!-- Dropdown stays within the main container -->
-          <!-- <div id="dropdownContent4"
-            class="dropdown-content absolute top-20 left-0 mt-8 w-full bg-[#c6e3e85c] border border-gray-300 shadow-lg rounded-lg p-2 z-20 hidden">
-            <p>Vehicles/Lane: ?</p>
-            <p>Emergency Vehicles Count: ?</p>
-            <p>Delay Time: ?</p>
-            <video controls autoplay class="w-full mt-2 rounded">
+          <!-- Dropdown content -->
+          <div id="dropdownContent4"
+            style="width: 21rem; height: 16rem; padding: 5px; top: 24px; right: 10px; margin-top: 6rem; bottom: 2rem;"
+            class="absolute bg-[#c6e3e85c] border border-gray-300 shadow-lg mb-20 rounded-lg z-20 hidden">
+            <video controls autoplay style="width: 100%; height: 100%; object-fit: cover; border-radius: 10px;"
+              class="rounded-xl">
+
               <source src="https://videos.pexels.com/video-files/20444835/20444835-hd_1920_1080_30fps.mp4"
                 type="video/mp4">
               Your browser does not support the video tag.
             </video>
-          </div> -->
+          </div>
         </div>
 
       </div>
