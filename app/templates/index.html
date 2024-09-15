@@ -8,59 +8,69 @@
   <link rel="stylesheet" href="../static/css/output.css" />
   <link rel="stylesheet" href="../static/index.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
 </head>
 
-<body class="font-montserrat">
+<body class="font-montserrat bg-[#232121f5]">
   <!-- ########################## Navbar ########################## -->
-  <div class="flex text-[#d3d2d2dd] items-center bg-[#121515d5] justify-between font-monteserrat p-3">
+  <div class="flex text-[#c2ced2f1] items-center bg-[#242828d5] justify-between font-monteserrat p-3">
     <p class="mt-2 pl-4 font-normal bg-none">Smart AI Traffic Manager</p>
 
     <div
       class="flex gap-1 font-semibold font-josefin border-2 text-[#000000] text-center border-[#000000] p-1 rounded-lg bg-[#7b7070c3]">
-      <button class="bg-[#999494c3] p-1 rounded-lg">Live</button>
-      <button class="bg-[#999494c3] p-1 rounded-lg">Preview</button>
+      <button class="bg-[#999494c3] p-1 rounded-lg" onclick="livePreview()">Live</button>
+      <button class="bg-[#999494c3] p-1 rounded-lg" onclick="showPreview()">Preview</button>
     </div>
+    <p class="pr-4 font-normal text-sm text-right pt-2"><span id="showDate" class="text-sm"></span><br> Delhi, India</p>
 
-    <p class="pr-4 font-normal">Delhi, India</p>
-  </div>
+    </div>
   <!-- ########################## Navbar End ######################## -->
 
+    <!-- ############################### Preview Container ###########################-->
+    <div id="previewContainer" class="hidden h-screen justify-center items-center">
+      <!-- Your preview content -->
+      <h1 class="text-5xl text-[#bfc8ced6]">This is the preview content
+        <br> The stats will be displayed here.
+      </h1>
+    </div>
 
 
 
   <!--  ########################## Main body component ########################## -->
-  <div class="h-[calc(100vh-70px)] flex gap-2 w-full">
+  <div id="mainBody" class="h-[calc(100vh-70px)] flex gap-2 w-full">
     <!-- ####################### MAP ###################### -->
-    <div id="map" class="flex items-center justify-center w-3/5"></div>
+    <div id="map" class="flex items-center justify-center h-full w-3/5"></div>
 
     <!-- ######################### DATA ############################ -->
     <div id="data" class="w-2/5 font-josefin">
 
-
-      <div class="flex items-center justify-center gap-4 text-3xl mt-2 p-3">
-
+      <div class="flex items-center relative text-[#f4f8f8] justify-center pb-4 pt-1">
         <!-- ############################# Heading ############################## -->
-        <!-- <i class="fa-solid fa-arrow-right-long fa-lg"></i> -->
-        <p class="mr-1">
+        <p class="mr-1 text-3xl">
           Rohini-16
           <span class="fa-solid fa-arrow-right-arrow-left ml-1"></span>
-        <p>Rohini-16 Intersection Point</p>
+          <p class="text-3xl pl-2">Rohini-18</p>
         </p>
-        <br>
-        <hr class="border-1 w-[36%] mx-auto absolute top-32 mt-3 border-[#b9b0b0]" />
-      </div>
+        <br/>
+        <!-- Smaller font size for the Intersection Point -->
+        <p class="text-lg absolute top-6 mt-3">Intersection Point</p>
+        
+        <hr class="border-1 w-[95%] mx-auto absolute top-12 my-4 border-[#b9b0b0]" />
+    </div>
+    
 
       <!-- ############################## Lane ################################ -->
       <div class="flex flex-col gap-4 mb-8">
 
 
         <!-- ####################  LANE 1 #################### -->
-        <div class="flex flex-col mt-6 p-2 relative mx-auto h-32 w-[95%] border-2 rounded-lg overflow-visible">
-          <div class="flex items-center justify-between h-10 border-b-2 w-full border-black border-opacity-10">
-            <p class="text-2xl ml-2">Rohini East</p>
+        <div class="flex flex-col mt-6 p-2 relative mx-auto h-32 w-[95%] border-2 border-[#ffffff39] rounded-lg overflow-visible">
+          <div class="flex items-center justify-between h-10 border-b-2 w-full border-white border-opacity-10">
+            <p class="text-2xl ml-2 text-[#ebeef1e9]">Rohini East</p>
             <div class="flex items-center mb-2">
               <p id="lane-status-1"
-                class="text-sm text-green-500 relative congested-open-label px-1 py-1 rounded-full border-2 border-[#0e852dc2]">
+                class="text-sm text-green-400 lane-status relative congested-open-label px-1 py-1 rounded-full border-2 border-[#0e852dc2]">
                 Open Lane</p>
             </div>
           </div>
@@ -69,13 +79,13 @@
             00:00
           </p>
 
-          <div class="flex font-montserrat flex-col mt-2 px-2">
-            <p class="text-sm truncate">No of Vehicles - <span id="random-number-1"
-                class="font-semibold text-md"></span></p>
+          <div class="flex font-montserrat text-[#bfc0c2e5] flex-col mt-2 px-2">
+            <p class="text-sm truncate">No of Vehicles - <span id="random-number"
+                class="font-semibold text-md text-white"></span></p>
             <p class="text-sm truncate">Congestion Rate - 40% (more than last hour)</p>
           </div>
 
-          <div class="relative z-10">
+          <div class="relative z-10 text-white">
             <button class="absolute right-4" onclick="toggleDropdown('dropdownContent1', 'dropdownIcon1')">
               <i id="dropdownIcon1" class="fa-solid fa-video fa-md"></i>
             </button>
@@ -87,7 +97,7 @@
             class="absolute bg-[#c6e3e85c] border border-gray-300 shadow-lg mb-20 rounded-lg z-20 hidden">
             <video autoplay muted playsinline style="width: 100%; height: 100%; object-fit: cover; border-radius: 10px;"
               class="rounded-xl">
-              <source src="../static/img/vid.mp4" type="video/mp4">
+              <source src="../static/img/Roads.mp4" type="video/mp4">
               Your browser does not support the video tag.
             </video>
 
@@ -97,12 +107,12 @@
 
 
         <!-- ####################  LANE 2 #################### -->
-        <div class="flex flex-col p-2 relative mx-auto h-32 w-[95%] border-2 rounded-lg overflow-visible">
-          <div class="flex items-center justify-between h-10 border-b-2 w-full border-black border-opacity-10">
-            <p class="text-2xl ml-2">Rohini West</p>
+        <div class="flex flex-col p-2 relative mx-auto h-32 w-[95%] border-2 rounded-lg border-[#ffffff39] overflow-visible">
+          <div class="flex items-center justify-between h-10 border-b-2 w-full border-white border-opacity-10">
+            <p class="text-2xl ml-2 text-[#ebeef1e9]">Rohini West</p>
             <div class="flex items-center  mb-2">
               <p id="lane-status-2"
-                class="text-sm text-green-500 relative congested-open-label px-1 py-1 rounded-full border-2 border-[#0e852dc2]">
+                class="text-sm text-green-400 lane-status relative congested-open-label px-1 py-1 rounded-full border-2 border-[#0e852dc2]">
                 Open Lane</p>
             </div>
           </div>
@@ -111,16 +121,16 @@
             00:00
           </p>
 
-          <div class="flex font-montserrat flex-col mt-2 px-2">
+          <div class="flex font-montserrat flex-col text-[#bfc0c2e5] mt-2 px-2">
             <p class="text-sm truncate">No of Vehicles - <span id="random-number-2"
-                class="font-semibold text-md"></span></p>
+                class="font-semibold text-md text-white"></span></p>
             <p class="text-sm truncate">Congestion Rate - 40% (more than last hour)</p>
             <p id="emergencyMessage" class="text-md text-red-600 font-bold hidden absolute bottom-1 left-4 z-10">
               <span><i class="fa-solid fa-truck-medical"></i></span> Emergency vehicle detected
             </p>
             </div>
 
-          <div class="relative z-10">
+          <div class="relative z-10 text-white">
             <button class="absolute right-4 " onclick="toggleDropdown('dropdownContent2', 'dropdownIcon2')">
               <i id="dropdownIcon2" class="fa-solid fa-video fa-md"></i>
             </button>
@@ -140,12 +150,12 @@
 
 
         <!-- ########################  LANE 3 ####################### -->
-        <div class="flex flex-col p-2 relative mx-auto h-32 w-[95%] border-2 rounded-lg overflow-visible">
-          <div class="flex items-center justify-between h-10 border-b-2 w-full border-black border-opacity-10">
-            <p class="text-2xl ml-2">Rohini south</p>
+        <div class="flex flex-col p-2 relative mx-auto h-32 w-[95%] border-2 rounded-lg border-[#ffffff39] overflow-visible">
+          <div class="flex items-center justify-between h-10 border-b-2 w-full border-white border-opacity-10">
+            <p class="text-2xl ml-2 text-[#ebeef1e9]">Rohini South</p>
             <div class="flex items-center mb-2">
               <p id="lane-status-3"
-                class="text-sm text-green-700 relative congested-open-label px-1 py-1 rounded-full border-2 border-[#0e852dc2]">
+                class="text-sm text-green-400 lane-status relative congested-open-label px-1 py-1 rounded-full border-2 border-[#0e852dc2]">
                 Open Lane</p>
             </div>
           </div>
@@ -154,13 +164,13 @@
             00:00
           </p>
 
-          <div class="flex flex-col font-montserrat mt-2 px-2">
+          <div class="flex flex-col font-montserrat text-[#bfc0c2e5] mt-2 px-2">
             <p class="text-sm truncate">No of Vehicles - <span id="random-number-3"
-                class="font-semibold text-md"></span></p>
+                class="font-semibold text-md text-white"></span></p>
             <p class="text-sm truncate">Congestion Rate - 40% (more than last hour)</p>
           </div>
 
-          <div class="relative z-10">
+          <div class="relative z-10 text-white">
             <button class="absolute right-4" onclick="toggleDropdown('dropdownContent3', 'dropdownIcon3')">
               <i id="dropdownIcon3" class="fa-solid fa-video fa-md"></i>
             </button>
@@ -170,10 +180,9 @@
           <div id="dropdownContent3"
             style="width: 21rem; height: 16rem; padding: 5px; top: 24px; right: 10px; margin-top: 6rem; bottom: 2rem;"
             class="absolute bg-[#c6e3e85c] border border-gray-300 shadow-lg mb-20 rounded-lg z-20 hidden">
-            <video controls autoplay style="width: 100%; height: 100%; object-fit: cover; border-radius: 10px;"
+            <video autoplay muted playsinline style="width: 100%; height: 100%; object-fit: cover; border-radius: 10px;"
               class="rounded-xl">
-
-              <source src="https://videos.pexels.com/video-files/20444835/20444835-hd_1920_1080_30fps.mp4"
+              <source src="../static/img/vid.mp4"
                 type="video/mp4">
               Your browser does not support the video tag.
             </video>
@@ -184,12 +193,12 @@
 
 
         <!-- #########################  LANE 4 ######################## -->
-        <div class="flex flex-col p-2 relative mx-auto h-32 w-[95%] border-2 rounded-lg overflow-visible">
-          <div class="flex items-center justify-between h-10 border-b-2 w-full border-black border-opacity-10">
-            <p class="text-2xl ml-2">Rohini North</p>
+        <div class="flex flex-col p-2 relative mx-auto h-32 w-[95%] border-2 rounded-lg border-[#ffffff39] overflow-visible">
+          <div class="flex items-center justify-between h-10 border-b-2 w-full border-white border-opacity-10">
+            <p class="text-2xl ml-2 text-[#ebeef1e9]">Rohini North</p>
             <div class="flex items-center mb-2">
               <p id="lane-status-4"
-                class="text-sm text-green-400 relative px-1 py-1 rounded-full border-2 border-[#0e852dc2]">Open Lane</p>
+                class="text-sm text-green-400 lane-status relative px-1 py-1 rounded-full border-2 border-[#0e852dc2]">Open Lane</p>
             </div>
           </div>
           <p
@@ -197,16 +206,14 @@
             00:00
           </p>
 
-          <!-- <p id="random-number" class="absolute right-20 font-montserrat font-bold text-xl border-2 border-yellow-600 px-1 top-11 mr-2 mt-2"></p> -->
 
-
-          <div class="flex font-montserrat flex-col mt-2 px-2">
+          <div class="flex font-montserrat flex-col text-[#bfc0c2e5] mt-2 px-2">
             <p class="text-sm truncate">No of Vehicles - <span id="random-number-4"
-                class="font-semibold text-md"></span></p>
+                class="font-semibold text-md text-white"></span></p>
             <p class="text-sm truncate">Congestion Rate - 40% (more than last hour)</p>
           </div>
 
-          <div class="relative z-10">
+          <div class="relative z-10 text-white">
             <button class="absolute right-4" onclick="toggleDropdown('dropdownContent4', 'dropdownIcon4')">
               <i id="dropdownIcon4" class="fa-solid fa-video fa-md"></i>
             </button>
@@ -216,10 +223,9 @@
           <div id="dropdownContent4"
             style="width: 21rem; height: 16rem; padding: 5px; top: 24px; right: 10px; margin-top: 6rem; bottom: 2rem;"
             class="absolute bg-[#c6e3e85c] border border-gray-300 shadow-lg mb-20 rounded-lg z-20 hidden">
-            <video controls autoplay style="width: 100%; height: 100%; object-fit: cover; border-radius: 10px;"
+            <video autoplay muted playsinline style="width: 100%; height: 100%; object-fit: cover; border-radius: 10px;"
               class="rounded-xl">
-
-              <source src="https://videos.pexels.com/video-files/20444835/20444835-hd_1920_1080_30fps.mp4"
+              <source src="../static/img/vid-4.mp4"
                 type="video/mp4">
               Your browser does not support the video tag.
             </video>
@@ -235,20 +241,13 @@
 
 
   <!-- ############################## Script ############################### -->
-  <!-- <script>
-      fetch("/api/data")
-        .then((response) => response.json())
-        .then((data) => {
-          document.getElementById("data").innerText = data.message;
-        });
-    </script> -->
 
   <script src="../static/js/map.js"></script>
 
   <script
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAHj_8vSiHQUY_aZ_DW4Vzt8jq1CiLPe3Y&callback=initMap&libraries=marker"
     async defer></script>
-  <script src="../static/js/button.js" defer></script>
+  <script src="../static/js/script.js" defer></script>
 
 </body>
 

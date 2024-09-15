@@ -5,41 +5,35 @@
     padding: 0;
 }
 
-/* .congested-label::before {
-    content: "";
-    display: inline-block;
-    width: 10px;
-    height: 10px;
-    background-color: red;
-    border-radius: 50%;
-    margin-left: 8px;
-    /* Adjust spacing as needed */
-    /* margin-right: 6px; */
-    /* animation: blink 1s infinite; */
-    /* Animation for blinking effect */
-/* } */
+body{
+    color: rgba(255, 255, 255, 0.736);
+}
 
-/* .congested-medium-label::before {
-    content: "";
-    display: inline-block;
-    width: 10px;
-    height: 10px;
-    background-color: yellow;
-    border-radius: 50%;
-    margin-left: 8px;
-    /* Adjust spacing as needed */
-    /* margin-right: 6px; */
-    /* animation: blink 1s infinite; */
-    /* Animation for blinking effect */
-/* }  */
+/* styles.css */
 
-/* .congested-open-label::before {
-    content: "";
-    display: inline-block;
-    width: 10px;
-    height: 10px;
-    /* background-color: green; */
-    /* border-radius: 50%; */
+.lane-status {
+    font-size: 0.875rem; /* text-sm */
+    padding: 0.25rem 0.5rem; /* px-1 py-1 */
+    border-radius: 9999px; /* rounded-full */
+    border-width: 2px; /* border-2 */
+    transition: color 0.3s, border-color 0.3s;
+}
+
+/* Define color states */
+.lane-status.open {
+    color: #0e852d; /* text-green-500 */
+    border-color: #0e852d; /* border-[#0e852dc2] */
+}
+
+.lane-status.moderate {
+    color: yellow; /* text-yellow-500 */
+    border-color: yellow; /* border-yellow-500 */
+}
+
+.lane-status.congested {
+    color: red; /* text-red-600 */
+    border-color: red; /* border-red-600 */
+}
 
 
 /* Add to your CSS file if needed for custom styles */
@@ -66,7 +60,7 @@
 
 /* Define the blinking green effect */
 .traffic-light.green::before {
-    background-color: green;
+    background-color: rgb(27, 216, 27);
     animation: blink 1s infinite; /* Green light blinks */
 }
 
@@ -88,8 +82,8 @@
 }
 
 .traffic-light.green {
-    color: green;/* No blinking for red */
-    border-color: green;
+    color: rgb(27, 216, 27);/* No blinking for red */
+    border-color: rgb(27, 216, 27);
 }
 
 .blinking {
